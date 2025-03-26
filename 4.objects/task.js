@@ -11,11 +11,8 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMarks = function (...marks) {
     if (this.hasOwnProperty('marks')) {
-        for (let mark of marks) {
-            this.marks.push(mark);
-        }
-    }
-    
+        this.marks.push(...marks);
+    }  
 }
 
 Student.prototype.getAverage = function () {
