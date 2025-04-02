@@ -74,14 +74,19 @@ class Library {
 		}
 	}
 
-	findBookBy(type, value) {
-		for (let book of this.books) {
-			if (book.hasOwnProperty(type) && book[type] === value) {
-				return book;
-			}
-		}
-		return null;
-	}
+	// findBookBy(type, value) {
+	// 	for (let book of this.books) {
+	// 		if (book.hasOwnProperty(type) && book[type] === value) {
+	// 			return book;
+	// 		}
+	// 	}
+	// 	return null;
+	// }
+
+    findBookBy(type, value) {
+        const findBook = this.books.find(book => book.hasOwnProperty(type) && book[type] === value);
+        return findBook !== undefined ? findBook : null;
+    }
 
 	giveBookByName(bookName) {
 		for (let i = 0; i < this.books.length; i++) {
@@ -124,3 +129,46 @@ console.log(library.findBookBy("releaseDate", 1924).name); //"Мурзилка"
 console.log("Количество книг до выдачи: " + library.books.length); //Количество книг до выдачи: 4
 library.giveBookByName("Машина времени");
 console.log("Количество книг после выдачи: " + library.books.length); //Количество книг после выдачи: 3
+
+myBook = new Book('А. Сапковский', 'Меч Предназначения', 1992, 384);
+myBook.state = 30;
+library.addBook(myBook);
+console.log("Количество книг: " + library.books.length);
+
+
+class Student {
+	constructor(name) {
+		this.name = name;
+        this.marks = {};
+		let arr
+	}
+
+    addMark(mark, subject) { 
+        if (mark > 1 && mark < 6) {
+        	if (!this.marks.hasOwnProperty(subject)) { 
+				this.marks[subject] = [];
+				this.marks[subject].push(mark);
+			} else this.marks[subject].push(mark);
+
+        }  
+    }
+
+	getAverageBySubject(subject) {
+		if (this.marks.hasOwnProperty(subject)) {
+			let sum = this.marks[subject].reduce((accum, current) => accum + current, 0);
+			return parseFloat((sum / this.marks[subject].length).toFixed(2));
+		} else return 0;
+	}
+
+	getAverage () {
+		if (Object.keys(this.marks).length != 0) {
+			// let sum = 0;
+			// for (let subject of Object.keys(this.marks)) {
+			// sum += this.getAverageBySubject(subject);
+			// }
+			let sum = Object.keys(this.marks).reduce((accum, subject) => accum + this.getAverageBySubject(subject), 0);
+			return parseFloat((sum / Object.keys(this.marks).length).toFixed(2));
+		} else return 0;
+	}
+}
+
