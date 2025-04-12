@@ -8,14 +8,15 @@ class AlarmClock {
 		if (time === null || callback === undefined) {
 			throw new Error('Отсутствуют обязательные аргументы');
 		}
+
 		// if (this.alarmCollection.find(alarm => alarm.time === time) !== undefined) {
 		// 	console.warn('Уже присутствует звонок на это же время');
 		// }
-        this.alarmCollection.forEach(alarm => {
-            if (alarm.time === time) {
-			    console.warn('Уже присутствует звонок на это же время');
-		    }
-        })
+		this.alarmCollection.forEach(alarm => {
+			if (alarm.time === time) {
+				console.warn('Уже присутствует звонок на это же время');
+			}
+		})
 		this.alarmCollection.push({
 			callback: callback,
 			time: time,
