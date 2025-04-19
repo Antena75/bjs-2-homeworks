@@ -88,17 +88,26 @@ class Library {
         return findBook !== undefined ? findBook : null;
     }
 
+	// giveBookByName(bookName) {
+	// 	for (let i = 0; i < this.books.length; i++) {
+	// 		if (this.books[i].name === bookName) {
+	// 			let giveBook = this.books[i];
+	// 			this.books.splice(i, 1)
+	// 			return giveBook;
+	// 		}
+	// 	}
+	// 	return null;
+	// }
+
 	giveBookByName(bookName) {
-		for (let i = 0; i < this.books.length; i++) {
-			if (this.books[i].name === bookName) {
-				let giveBook = this.books[i];
-				this.books.splice(i, 1)
-				return giveBook;
-			}
-		}
-		return null;
-	}
+		const book = this.findBookBy("name", bookName);
+		if (!book) return null;
+		this.books = this.books.filter(item => item.name !== bookName);
+		return book;
+	  }
+
 }
+
 
 const library = new Library("Библиотека имени Ленина");
 
